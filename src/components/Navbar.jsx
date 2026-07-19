@@ -1,0 +1,57 @@
+import { Link } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
+
+function Navbar() {
+  const { totalItems } = useCart();
+
+  return (
+    <header className="sticky top-0 z-50 bg-white shadow-md">
+      {/* نوار بالا */}
+      <div className="bg-raha-pink text-white text-center text-sm py-2 font-medium tracking-wide">
+        آماده‌سازی و تحویل سفارشات ۳ تا ۱۲ روز کاری می‌باشد
+      </div>
+
+      {/* هدر اصلی */}
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between gap-4">
+        <Link to="/" className="text-2xl font-black text-raha-pink tracking-tight">
+          گالری رها
+        </Link>
+
+        <div className="hidden md:flex flex-1 max-w-xl">
+          <input
+            type="text"
+            placeholder="جستجو بین هزاران محصول..."
+            className="w-full rounded-full border border-gray-200 px-5 py-2.5 focus:outline-none focus:border-raha-pink"
+          />
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Link to="/login" className="text-gray-700 hover:text-raha-pink text-sm font-medium">
+            ورود / ثبت نام
+          </Link>
+          <Link to="/cart" className="relative">
+            <span className="text-2xl">🛒</span>
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-raha-pink text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
+          </Link>
+        </div>
+      </div>
+
+      {/* خط جداکننده و منو */}
+     <nav className="border-t-2 border-raha-pink/20 bg-raha-light">
+  <ul className="container mx-auto px-4 flex justify-center gap-6 py-3 text-sm font-semibold">
+    <li><Link to="/" className="text-raha-pink">خانه</Link></li>
+    <li><Link to="/products" className="text-gray-700 hover:text-raha-pink transition-colors">محصولات</Link></li>
+    <li><Link to="/categories" className="text-gray-700 hover:text-raha-pink transition-colors">دسته‌بندی‌ها</Link></li>
+    <li><Link to="/about" className="text-gray-700 hover:text-raha-pink transition-colors">درباره ما</Link></li>
+    <li><Link to="/contact" className="text-gray-700 hover:text-raha-pink transition-colors">تماس با ما</Link></li>
+  </ul>
+</nav>
+    </header>
+  );
+}
+
+export default Navbar;
