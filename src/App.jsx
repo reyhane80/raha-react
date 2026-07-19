@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Contact from './pages/Contact';
+import About from './pages/About';
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/products" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
             <Route path="/product/:id" element={<ProductDetail />} />
           </Routes>
           <Footer />
