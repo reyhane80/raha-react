@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Footer() {
   return (
     <footer className="bg-raha-dark text-white mt-14">
@@ -16,11 +18,11 @@ function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-4">دسترسی سریع</h3>
           <ul className="space-y-2 text-white/70 text-sm">
-            <li className="hover:text-white cursor-pointer">صفحه اصلی</li>
-            <li className="hover:text-white cursor-pointer">همه محصولات</li>
-            <li className="hover:text-white cursor-pointer">دسته‌بندی‌ها</li>
-            <li className="hover:text-white cursor-pointer">ورود / ثبت نام</li>
-            <li className="hover:text-white cursor-pointer">سبد خرید</li>
+            <li><Link to="/" className="hover:text-white transition-colors">صفحه اصلی</Link></li>
+            <li><Link to="/products" className="hover:text-white transition-colors">همه محصولات</Link></li>
+            <li><Link to="/categories" className="hover:text-white transition-colors">دسته‌بندی‌ها</Link></li>
+            <li><Link to="/login" className="hover:text-white transition-colors">ورود / ثبت نام</Link></li>
+            <li><Link to="/cart" className="hover:text-white transition-colors">سبد خرید</Link></li>
           </ul>
         </div>
 
@@ -28,10 +30,10 @@ function Footer() {
         <div>
           <h3 className="font-bold text-lg mb-4">خدمات مشتریان</h3>
           <ul className="space-y-2 text-white/70 text-sm">
-            <li className="hover:text-white cursor-pointer">سوالات متداول</li>
-            <li className="hover:text-white cursor-pointer">شرایط ارسال</li>
-            <li className="hover:text-white cursor-pointer">بازگشت کالا</li>
-            <li className="hover:text-white cursor-pointer">تماس با ما</li>
+            <li><Link to="/guide?section=faq" className="hover:text-white transition-colors">سوالات متداول</Link></li>
+            <li><Link to="/guide?section=shipping" className="hover:text-white transition-colors">شرایط ارسال</Link></li>
+            <li><Link to="/guide?section=return" className="hover:text-white transition-colors">بازگشت کالا</Link></li>
+            <li><Link to="/contact" className="hover:text-white transition-colors">تماس با ما</Link></li>
           </ul>
         </div>
 
@@ -54,7 +56,6 @@ function Footer() {
         </div>
       </div>
 
-      {/* کپی‌رایت */}
       <div className="border-t border-white/10 py-4 text-center text-white/50 text-sm">
         © ۱۴۰۵ فروشگاه رها — تمامی حقوق محفوظ است
       </div>
