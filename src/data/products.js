@@ -8,6 +8,8 @@ export const products = [
     category: 'women',
     image: '/images/nike-women.jpg',
     description: 'طراحی شیک و راحت، مناسب پیاده‌روی و باشگاه',
+    sizes: ['۳۶', '۳۷', '۳۸', '۳۹', '۴۰'],
+    colors: ['سفید', 'مشکی', 'صورتی'],
   },
   {
     id: 2,
@@ -19,6 +21,8 @@ export const products = [
     category: 'men',
     image: '/images/jeans-men.jpg',
     description: 'شلوار جین شیک و خوش‌دوخت، مناسب استفاده روزمره',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['آبی', 'مشکی'],
   },
   {
     id: 3,
@@ -29,6 +33,8 @@ export const products = [
     category: 'men',
     image: '/images/shirt-men.jpg',
     description: 'طراحی شیک و رسمی، مناسب محیط کار و مجالس',
+    sizes: ['S', 'M', 'L', 'XL', 'XXL'],
+    colors: ['سفید', 'آبی', 'خاکی'],
   },
   {
     id: 4,
@@ -39,5 +45,7 @@ export const products = [
     category: 'men',
     image: '/images/nike-men.jpg',
     description: 'طراحی راحت و مدرن، مناسب ورزش و استایل روزمره',
+    sizes: ['۴۰', '۴۱', '۴۲', '۴۳', '۴۴'],
+    colors: ['مشکی', 'سفید', 'قرمز'],
   },
 ];
