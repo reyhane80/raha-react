@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 function Navbar() {
   const { totalItems } = useCart();
   const [search, setSearch] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -34,16 +35,13 @@ function Navbar() {
             placeholder="جستجو بین هزاران محصول..."
             className="w-full rounded-full border border-gray-200 px-5 py-2.5 focus:outline-none focus:border-raha-pink"
           />
-          <button
-            type="submit"
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-raha-pink"
-          >
+          <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-raha-pink">
             🔍
           </button>
         </form>
 
         <div className="flex items-center gap-4">
-          <Link to="/login" className="text-gray-700 hover:text-raha-pink text-sm font-medium">
+          <Link to="/login" className="hidden md:block text-gray-700 hover:text-raha-pink text-sm font-medium">
             ورود / ثبت نام
           </Link>
           <Link to="/cart" className="relative">
@@ -54,10 +52,44 @@ function Navbar() {
               </span>
             )}
           </Link>
+          {/* همبرگر */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden flex flex-col gap-1.5 p-1"
+          >
+            <span className={`block w-6 h-0.5 bg-raha-pink transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-raha-pink transition-all ${menuOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-raha-pink transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          </button>
         </div>
       </div>
 
-      <nav className="border-t-2 border-raha-pink/20 bg-raha-light">
+      {/* منوی موبایل */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-4 flex flex-col gap-3" dir="rtl">
+          <form onSubmit={handleSearch} className="relative mb-2">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="جستجو..."
+              className="w-full rounded-full border border-gray-200 px-5 py-2.5 focus:outline-none focus:border-raha-pink text-sm"
+            />
+            <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+              🔍
+            </button>
+          </form>
+          <Link to="/" onClick={() => setMenuOpen(false)} className="text-raha-pink font-bold py-2 border-b border-gray-100">خانه</Link>
+          <Link to="/products" onClick={() => setMenuOpen(false)} className="text-gray-700 font-bold py-2 border-b border-gray-100 hover:text-raha-pink">محصولات</Link>
+          <Link to="/categories" onClick={() => setMenuOpen(false)} className="text-gray-700 font-bold py-2 border-b border-gray-100 hover:text-raha-pink">دسته‌بندی‌ها</Link>
+          <Link to="/about" onClick={() => setMenuOpen(false)} className="text-gray-700 font-bold py-2 border-b border-gray-100 hover:text-raha-pink">درباره ما</Link>
+          <Link to="/contact" onClick={() => setMenuOpen(false)} className="text-gray-700 font-bold py-2 border-b border-gray-100 hover:text-raha-pink">تماس با ما</Link>
+          <Link to="/login" onClick={() => setMenuOpen(false)} className="text-gray-700 font-bold py-2 hover:text-raha-pink">ورود / ثبت نام</Link>
+        </div>
+      )}
+
+      {/* منوی دسکتاپ */}
+      <nav className="hidden md:block border-t-2 border-raha-pink/20 bg-raha-light">
         <ul className="container mx-auto px-4 flex justify-center gap-6 py-3 text-sm font-semibold">
           <li><Link to="/" className="text-raha-pink">خانه</Link></li>
           <li><Link to="/products" className="text-gray-700 hover:text-raha-pink transition-colors">محصولات</Link></li>
