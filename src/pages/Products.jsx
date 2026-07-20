@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { products } from '../data/products';
 import ProductCard from '../components/ProductCard';
 
@@ -7,21 +8,42 @@ const categories = [
   { id: 'men', name: 'مردانه' },
   { id: 'women', name: 'زنانه' },
   { id: 'kids', name: 'کودکان' },
+  { id: 'bags', name: 'کیف' },
+  { id: 'accessories', name: 'اکسسوری' },
 ];
 
 function Products() {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const categoryParam = params.get('category') || 'all';
+  const searchParam = params.get('search') || '';
 
-  const filtered =
-    activeCategory === 'all'
-      ? products
-      : products.filter((p) => p.category === activeCategory);
+  const [activeCategory, setActiveCategory] = useState(categoryParam);
+  const [searchText, setSearchText] = useState(searchParam);
+
+  useEffect(() => {
+    setActiveCategory(categoryParam);
+    setSearchText(searchParam);
+  }, [location.search]);
+
+  const filtered = products.filter((p) => {
+    const matchCategory = activeCategory === 'all' || p.category === activeCategory;
+    const matchSearch = searchText === '' || p.name.includes(searchText) || p.description.includes(searchText);
+    return matchCategory && matchSearch;
+  });
 
   return (
-    <div className="container mx-auto px-4 py-14">
-      <h1 className="text-2xl font-bold text-center text-raha-pink mb-8">
+    <div className="container mx-auto px-4 py-14" dir="rtl">
+      <h1 className="text-3xl font-black text-center text-raha-pink mb-8">
         همه محصولات
       </h1>
+
+      {/* سرچ */}
+      {searchText && (
+        <p className="text-center text-gray-500 mb-6">
+          نتایج جستجو برای: <span className="text-raha-pink font-bold">«{searchText}»</span>
+        </p>
+      )}
 
       {/* فیلتر دسته‌بندی */}
       <div className="flex justify-center gap-3 mb-10 flex-wrap">
@@ -49,7 +71,7 @@ function Products() {
         </div>
       ) : (
         <p className="text-center text-gray-500 py-10">
-          محصولی در این دسته‌بندی یافت نشد
+          محصولی یافت نشد
         </p>
       )}
     </div>
